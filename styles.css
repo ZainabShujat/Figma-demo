@@ -47,7 +47,7 @@ body {
 .header-inner {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 150px; /* Increase this value for more space between logo and nav */
   padding: 14px 0;
   position: relative;
 }
@@ -73,22 +73,54 @@ body {
   .header-spacer { display: none; }
 }
 
-/* desktop nav */
-.desktop-nav {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  justify-content: center;
-  z-index: 2;
+/* Ensure header-inner uses space-between for mobile */
+@media (max-width: 640px) {
+  .header-inner {
+    gap: 0;
+    justify-content: space-between;
+    padding: 10px 0;
+  }
+  .brand {
+    margin-right: 0;
+  }
+  .mobile-menu-btn {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: 0;
+    align-self: center;
+  }
 }
 
-.desktop-nav a { text-decoration:none; color:#333; font-weight:600; font-size:14px; padding:6px; }
+/* Optional: Remove .header-spacer if present for mobile */
+@media (max-width: 640px) {
+  .header-spacer { display: none; }
+}
+
+/* desktop nav */
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nav-links {
+  display: flex;
+  gap: 18px;
+}
+
+.nav-cta {
+  margin-left: auto;
+  margin-right: 0;
+  /* Add padding to keep it away from the edge, adjust as needed */
+  padding-right: 8px;
+}
+
+.desktop-nav a { text-decoration:none; color:#333; font-weight:600; font-size:14px; padding:6px;   white-space: nowrap;
+}
 .btn { display:inline-block; text-decoration:none; padding:12px 20px; border-radius:999px; font-weight:700; }
 .btn.small { padding:8px 14px; font-size:14px; }
+
 
 .desktop-nav .btn.primary {
   margin-left: 100px; /* Increase or decrease as needed for desired spacing */
@@ -182,8 +214,29 @@ body {
 
 /* hero right stage */
 .hero-right { display:flex; justify-content:center; align-items:flex-end; }
-.hero-stage { position:relative; width:100%; max-width: var(--hero-image-width); display:flex; justify-content:center; align-items:flex-end; }
-.hero-image { width:100%; height:auto; display:block; object-fit:contain; border-radius: 10px; }
+.hero-stage {
+  position: relative;
+  width: 100%;
+  max-width: var(--hero-image-width);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.hero-stage::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%);
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, #FFD2DC 80%, transparent 100%);
+  opacity: 0.7;
+  z-index: 0;
+  pointer-events: none;
+}
+.hero-image { width:100%; height:auto; display:block; object-fit:contain; border-radius: 10px; position: relative; z-index: 1; }
 
 /* rating badge */
 .overlay-rating {
@@ -264,135 +317,244 @@ body {
 }
 
 @media (max-width: 640px) {
-  .desktop-nav { display:none; }
-  .mobile-menu-btn { display:inline-block; }
-  .brand-tag { display:none; }
-  .container { padding: 0 18px; }
-  :root { --hero-image-width: 320px; --hero-h1-size: 28px; }
-  .hero { padding: 36px 0 24px; background: #fff; }
-  .hero::before { top: 12%; width: 70vw; height: 70vw; opacity: 0.95; }
+  /* Header */
+  .site-header {
+    background: #fff !important;
+    border-bottom: 1px solid #eee;
+  }
+  .header-inner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+    padding: 10px 12px;
+  }
+  .brand {
+    margin-right: 0;
+  }
+  .logo {
+    height: 36px;
+    width: auto;
+  }
+  .brand-name {
+    color: #111;
+    font-size: 18px;
+  }
+  .brand-tag {
+    display: block;
+    font-size: 12px;
+    color: #777;
+    margin-top: -2px;
+    margin-left: 2px;
+    text-align: left;
+    font-weight: 400;
+  }
+  .desktop-nav {
+    display: none !important;
+  }
+  .mobile-menu-btn {
+    display: inline-block !important;
+    margin-left: auto;
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: #111;
+    cursor: pointer;
+  }
+
+  /* Mobile Sidebar */
   .mobile-nav {
-    display:block;
     position: fixed;
-    top:0;
-    right:0;
-    height:100%;
-    width:320px;
-    max-width:80%;
-    background: linear-gradient(180deg, rgba(255, 230, 236, 0.98), #fff);
+    top: 0;
+    right: 0;
+    width: 80vw;
+    max-width: 320px;
+    height: 100vh;
+    background: #FFD2DC;
+    box-shadow: -2px 0 16px rgba(0,0,0,0.08);
+    z-index: 1001;
     transform: translateX(100%);
-    z-index: 60;
-    padding: 18px;
-    transition: transform .28s ease;
+    transition: transform 0.3s;
+    padding: 32px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
   }
-  .mobile-nav.open { transform: translateX(0); }
-  .mobile-overlay { display:block; opacity:0; }
-}
-
-/* ---------- MOBILE NAV / SIDEBAR FIXES ---------- */
-/* Remove default bullets and tidy up links */
-.mobile-nav ul {
-  list-style: none;            /* remove bullets */
-  margin: 0;
-  padding: 8px 0 18px;
-}
-.mobile-nav li { margin: 8px 0; }
-
-/* Style mobile links like the design (no purple link color) */
-.mobile-nav a {
-  color: #222;                 /* dark link color */
-  text-decoration: none;       /* remove underline */
-  font-weight: 700;
-  padding: 8px 6px;
-  display: inline-block;
-  font-size: 18px;
-}
-
-/* Make the mobile sidebar narrower and aligned to the right */
-.mobile-nav {
-  width: 300px;                /* fixed comfortable width */
-  max-width: 80%;
-  right: 0;
-  left: auto;
-  transform: translateX(100%); /* default hidden offscreen on the right */
-  box-shadow: -20px 0 40px rgba(16,24,40,0.08);
-  background: linear-gradient(180deg, rgba(249, 116, 161, 0.95), #fff);
-  padding: 22px;
-}
-
-/* Close button nicely positioned (top-right inside the sidebar) */
-.mobile-close {
-  position: absolute;
-  top: 12px;
-  left: 12px;                  /* keep a small gap from left edge */
-  background: transparent;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-/* Make CTA in sidebar look like the big pill */
-.mobile-nav .btn.full {
-  display:block;
-  width: calc(100% - 24px);
-  margin: 18px auto 0;
-  text-align:center;
-  padding: 12px 18px;
-  border-radius: 999px;
-  font-weight:800;
-}
-
-/* Ensure overlay appears behind the sidebar and is clickable */
-.mobile-overlay.show {
-  display: block;
-  opacity: 1;
-  position: fixed;
-  inset: 0;
-  z-index: 59; /* below sidebar z-index which is 60 */
-}
-
-/* ---------- HERO: fix underline wrapping issue on mobile ---------- */
-/* Make highlight's underline smaller and not overlap following lines */
-.hero-title .highlight::after {
-  bottom: -6px;                /* lift underline closer to text */
-  height: 6px;                 /* thinner underline on mobile */
-  left: 0;
-  right: auto;                 /* let it size to content */
-  width: 100%;
-}
-
-/* Prevent underline from bleeding into next line by increasing line-gap */
-.hero-title { word-break: break-word; line-height: 1.02; }
-
-/* Specifically on small screens, shrink underline and adjust spacing */
-@media (max-width: 640px) {
-  .hero-title {
-    font-size: 28px;           /* keep mobile H1 readable and avoid wrapping issues */
-    line-height: 1.02;
-    margin-bottom: 14px;
+  .mobile-nav.open {
+    transform: translateX(0);
   }
-  .hero-title .highlight::after {
-    bottom: -4px;
-    height: 4px;
+  .mobile-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: none;
+    border: none;
+    font-size: 26px;
+    color: #111;
+    cursor: pointer;
+  }
+  .mobile-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .mobile-nav li a {
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    font-weight: 600;
+    color: #222;
+    text-decoration: none;
+    padding: 8px 0;
+  }
+  .mobile-nav .nav-icon {
+    width: 22px;
+    height: 22px;
+    margin-right: 14px;
+    object-fit: contain;
+  }
+  .mobile-nav .btn.full {
     width: 100%;
-    transform: translateY(3px);
-    box-shadow: 0 0 0 3px rgba(255,47,85,0.04);
+    text-align: center;
+    margin-top: 12px;
+  }
+  .mobile-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.18);
+    z-index: 1000;
+    transition: opacity 0.3s;
+  }
+  .mobile-overlay.show {
+    display: block;
   }
 
-  /* Ensure hero left column uses full width above image on mobile */
-  .hero-grid { grid-template-columns: 1fr; gap: 20px; }
-
-  /* Buttons spacing and sizing on mobile */
-  .hero-cta { gap: 12px; }
-  .btn.outline { padding: 12px 20px; }
-  .btn.primary { padding: 12px 22px; }
-
-  /* Ensure hero stage (image) doesn't overlap text area */
-  .hero-stage { margin-top: 8px; }
-
-  /* Mobile nav: position close button top-right inside viewport (if needed) */
-  .mobile-close { left: auto; right: 14px; top: 12px; }
+  /* Hero Section */
+  .hero {
+    padding: 32px 0 18px 0;
+    background: #FFD2DC;
+  }
+  .hero-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .hero-left {
+    width: 100%;
+    text-align: center;
+  }
+  .hero-title {
+    font-size: 2rem;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .hero-sub {
+    font-size: 1rem;
+    margin-bottom: 18px;
+    color: #444;
+    text-align: center;
+  }
+  .hero-cta {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 0;
+  }
+  .btn {
+    font-size: 15px;
+    padding: 10px 18px;
+  }
+  .hero-right {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .hero-stage {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    min-height: 220px;
+  }
+ 
+  .hero-image {
+    position: relative;
+    z-index: 1;
+    max-width: 90vw;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+  }
+  .overlay-rating,
+  .overlay-stats {
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+  }
 }
 
-/* small accessibility polish: ensure links inside mobile nav are focus-visible */
-.mobile-nav a:focus { outline: 3px solid rgba(255,47,85,0.14); outline-offset: 4px; }
+/* Button Styles */
+.btn.primary,
+.btn.full.primary {
+  box-shadow: 0 0 16px 0 rgba(255, 64, 102, 0.25), 0 10px 30px rgba(255,64,102,0.12);
+}
+
+ .hero-stage::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -50%);
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, #bd6b7c 80%, transparent 100%);
+    opacity: 0.7;
+    z-index: 0;
+    pointer-events: none;
+  }
+.btn.outline {
+  box-shadow: 0 0 12px 0 rgba(255, 64, 102, 0.12);
+}
+
+/* Remove or comment out this block from your mobile CSS: */
+@media (max-width: 640px) {
+  /* ...existing code... */
+  /* REMOVE this block: */
+  /*
+  .hero-stage::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -50%);
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, var(--circle-color) 80%, transparent 100%);
+    opacity: 0.9;
+    z-index: 0;
+    pointer-events: none;
+  }
+  */
+}
+
+/* Adjust the .hero::before for mobile: */
+@media (max-width: 640px) {
+  .hero::before {
+    top: 10%; /* Move circle even higher if needed */
+    left: 50%;
+    width: 2000px;   /* Significantly larger */
+    height: 2000px;  /* Significantly larger */
+    background: radial-gradient(circle at 50% 40%, var(--circle-color) 0%, transparent 70%);
+    opacity: 0.98;
+    filter: blur(2px);
+  }
+}

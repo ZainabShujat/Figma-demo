@@ -27,7 +27,7 @@
         <a href="#">Our Services</a>
         <a href="#">Pricing</a>
         <a href="#">FAQ</a>
-        <a class="btn small primary" href="#">Get A Quote</a>
+        <a class="btn small primary nav-cta" href="#">Get A Quote</a>
       </nav>
 
       <button class="mobile-menu-btn" aria-label="Open menu">☰</button>
@@ -38,13 +38,38 @@
   <aside class="mobile-nav" id="mobileNav" aria-hidden="true">
     <button class="mobile-close" id="mobileClose">✕</button>
     <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About Us</a></li>
-      <li><a href="#">Our Services</a></li>
-      <li><a href="#">Pricing</a></li>
-      <li><a href="#">FAQ</a></li>
+      <li>
+        <a href="#">
+          <img src="assets/images/homeiconnavmenu.png" alt="" class="nav-icon" />
+          Home
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img src="assets/images/aboutusiconnavmenu.png" alt="" class="nav-icon" />
+          About Us
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img src="assets/images/ourservicesnavmenu.png" alt="" class="nav-icon" />
+          Our Services
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img src="assets/images/pricingnavmenu.png" alt="" class="nav-icon" />
+          Pricing
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <img src="assets/images/faqnavmenu.png" alt="" class="nav-icon" />
+          FAQ
+        </a>
+      </li>
     </ul>
-    <a class="btn full primary" href="#">Get A Quote</a>
+    <a class="btn full primary" href="#">Contact Us</a>
   </aside>
   <div class="mobile-overlay" id="mobileOverlay"></div>
 
@@ -145,7 +170,7 @@
     closeBtn?.addEventListener('click', () => {
       mobileNav.classList.remove('open');
       mobileOverlay.classList.remove('show');
-      mobileNav.setAttribute('aria-hidden', 'true');
+      mobileNav.setAttribute('aria-hidden', 'true');      mobileNav.setAttribute('aria-hidden', 'true');
     });
     mobileOverlay?.addEventListener('click', () => {
       mobileNav.classList.remove('open');
