@@ -256,3 +256,111 @@ body {
   .mobile-nav.open { transform: translateX(0); }
   .mobile-overlay { display:block; opacity:0; }
 }
+
+/* ---------- MOBILE NAV / SIDEBAR FIXES ---------- */
+/* Remove default bullets and tidy up links */
+.mobile-nav ul {
+  list-style: none;            /* remove bullets */
+  margin: 0;
+  padding: 8px 0 18px;
+}
+.mobile-nav li { margin: 8px 0; }
+
+/* Style mobile links like the design (no purple link color) */
+.mobile-nav a {
+  color: #222;                 /* dark link color */
+  text-decoration: none;       /* remove underline */
+  font-weight: 700;
+  padding: 8px 6px;
+  display: inline-block;
+  font-size: 18px;
+}
+
+/* Make the mobile sidebar narrower and aligned to the right */
+.mobile-nav {
+  width: 300px;                /* fixed comfortable width */
+  max-width: 80%;
+  right: 0;
+  left: auto;
+  transform: translateX(100%); /* default hidden offscreen on the right */
+  box-shadow: -20px 0 40px rgba(16,24,40,0.08);
+  background: linear-gradient(180deg, rgba(255,240,245,0.95), #fff);
+  padding: 22px;
+}
+
+/* Close button nicely positioned (top-right inside the sidebar) */
+.mobile-close {
+  position: absolute;
+  top: 12px;
+  left: 12px;                  /* keep a small gap from left edge */
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Make CTA in sidebar look like the big pill */
+.mobile-nav .btn.full {
+  display:block;
+  width: calc(100% - 24px);
+  margin: 18px auto 0;
+  text-align:center;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight:800;
+}
+
+/* Ensure overlay appears behind the sidebar and is clickable */
+.mobile-overlay.show {
+  display: block;
+  opacity: 1;
+  position: fixed;
+  inset: 0;
+  z-index: 59; /* below sidebar z-index which is 60 */
+}
+
+/* ---------- HERO: fix underline wrapping issue on mobile ---------- */
+/* Make highlight's underline smaller and not overlap following lines */
+.hero-title .highlight::after {
+  bottom: -6px;                /* lift underline closer to text */
+  height: 6px;                 /* thinner underline on mobile */
+  left: 0;
+  right: auto;                 /* let it size to content */
+  width: 100%;
+}
+
+/* Prevent underline from bleeding into next line by increasing line-gap */
+.hero-title { word-break: break-word; line-height: 1.02; }
+
+/* Specifically on small screens, shrink underline and adjust spacing */
+@media (max-width: 640px) {
+  .hero-title {
+    font-size: 28px;           /* keep mobile H1 readable and avoid wrapping issues */
+    line-height: 1.02;
+    margin-bottom: 14px;
+  }
+  .hero-title .highlight::after {
+    bottom: -4px;
+    height: 4px;
+    width: 100%;
+    transform: translateY(3px);
+    box-shadow: 0 0 0 3px rgba(255,47,85,0.04);
+  }
+
+  /* Ensure hero left column uses full width above image on mobile */
+  .hero-grid { grid-template-columns: 1fr; gap: 20px; }
+
+  /* Buttons spacing and sizing on mobile */
+  .hero-cta { gap: 12px; }
+  .btn.outline { padding: 12px 20px; }
+  .btn.primary { padding: 12px 22px; }
+
+  /* Ensure hero stage (image) doesn't overlap text area */
+  .hero-stage { margin-top: 8px; }
+
+  /* Mobile nav: position close button top-right inside viewport (if needed) */
+  .mobile-close { left: auto; right: 14px; top: 12px; }
+}
+
+/* small accessibility polish: ensure links inside mobile nav are focus-visible */
+.mobile-nav a:focus { outline: 3px solid rgba(255,47,85,0.14); outline-offset: 4px; }
