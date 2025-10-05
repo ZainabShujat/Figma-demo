@@ -63,6 +63,16 @@ body {
 .brand-name { font-weight:700; letter-spacing:0.02em; }
 .brand-tag { font-size:12px; color:#777; text-transform:lowercase; }
 
+.header-spacer {
+  width: 44px; /* match .logo height or adjust as needed */
+  flex-shrink: 0;
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .header-spacer { display: none; }
+}
+
 /* desktop nav */
 .desktop-nav {
   flex: 1 1 auto; /* allow nav to grow and fill space */
