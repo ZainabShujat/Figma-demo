@@ -98,8 +98,8 @@ body {
 .hero {
   position: relative;
   overflow: visible;
-  padding: 72px 0 40px;
-  background: linear-gradient(90deg, rgba(255,240,245,0.6) 0%, rgba(255,245,247,0.6) 100%);
+  padding: 40px 0 0px;
+  background: linear-gradient(90deg, rgba(235, 113, 154, 0.6) 0%, rgba(255,245,247,0.6) 100%);
 }
 
 /* circle behind girl - placed via :before on hero */
@@ -316,7 +316,7 @@ body {
   left: auto;
   transform: translateX(100%); /* default hidden offscreen on the right */
   box-shadow: -20px 0 40px rgba(16,24,40,0.08);
-  background: linear-gradient(180deg, rgba(255,240,245,0.95), #fff);
+  background: linear-gradient(180deg, rgba(249, 116, 161, 0.95), #fff);
   padding: 22px;
 }
 
