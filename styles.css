@@ -660,3 +660,31 @@ body {
     line-height: 1.04 !important;
   }
 }
+@media (max-width: 640px) {
+  .hero-title .highlight,
+  .hero-title .highlight * {
+    background: transparent !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+    -webkit-text-decoration: none !important;
+    border: none !important;
+  }
+
+  .hero-title .highlight::after,
+  .hero-title .highlight::before,
+  .hero-title .highlight::marker,
+  .hero-title .highlight::first-line {
+    display: none !important;
+    content: none !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .hero-title {
+    line-height: 1.04 !important;
+  }
+}
