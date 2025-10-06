@@ -618,3 +618,29 @@ body {
 .hero-stage {
   overflow: visible !important;
 }
+/* Remove underline on mobile */
+@media (max-width: 640px) {
+  .hero-title .highlight::after {
+    display: none;
+  }
+}
+
+/* Add soft glow around primary buttons (both desktop & mobile) */
+.btn.primary,
+.btn.full.primary {
+  box-shadow:
+    0 0 20px rgba(255, 47, 85, 0.25),
+    0 0 8px rgba(255, 47, 85, 0.15);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Optional: make glow intensify slightly on hover (desktop only) */
+@media (hover: hover) {
+  .btn.primary:hover,
+  .btn.full.primary:hover {
+    box-shadow:
+      0 0 30px rgba(255, 47, 85, 0.35),
+      0 0 12px rgba(255, 47, 85, 0.25);
+    transform: translateY(-2px);
+  }
+}
