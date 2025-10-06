@@ -644,3 +644,19 @@ body {
     transform: translateY(-2px);
   }
 }
+/* Force-hide the underline on small screens (mobile) */
+@media (max-width: 640px) {
+  .hero-title .highlight::after,
+  .hero-title .highlight::before {
+    display: none !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    content: none !important;
+  }
+
+  /* tiny line-height tweak to avoid visual overlap */
+  .hero-title {
+    line-height: 1.04 !important;
+  }
+}
